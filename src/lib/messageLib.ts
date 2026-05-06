@@ -90,81 +90,81 @@ export function processMessage(
         text: normalized["conversation"] || undefined,
       };
     },
-    imageMessage: async () => {
-      const imgMessage: proto.Message.IImageMessage =
-        normalized["imageMessage"]!;
-      const fileLength = imgMessage.fileLength;
-      const mimeType = imgMessage.mimetype;
-      return {
-        ...defaultData,
-        fileLength: fileLength
-          ? Long.isLong(fileLength)
-            ? fileLength.toNumber()
-            : Number(fileLength)
-          : undefined,
-        width: imgMessage.width || undefined,
-        height: imgMessage.height || undefined,
-        isViewOnce: imgMessage.viewOnce || false,
-        text: imgMessage.caption || undefined,
-        ...(await download(
-          v7() + (mimeType ? "." + mimeType.split("/")[1] : ".jpg"),
-          mimeType || undefined,
-        )),
-      };
-    },
-    videoMessage: async () => {
-      const vdMessage: proto.Message.IVideoMessage =
-        normalized["videoMessage"]!;
-      const fileLength = vdMessage.fileLength;
-      const mimeType = vdMessage.mimetype;
-      return {
-        ...defaultData,
-        fileLength: fileLength
-          ? Long.isLong(fileLength)
-            ? fileLength.toNumber()
-            : Number(fileLength)
-          : undefined,
-        height: vdMessage.height || undefined,
-        width: vdMessage.width || undefined,
-        isViewOnce: vdMessage.viewOnce || false,
-        text: vdMessage.caption || undefined,
-        ...(await download(
-          v7() + (mimeType ? "." + mimeType.split("/")[1] : ".mp4"),
-          mimeType || undefined,
-        )),
-      };
-    },
-    audioMessage: async () => {
-      const audMessage: proto.Message.IAudioMessage =
-        normalized["audioMessage"]!;
-      const fileLength = audMessage.fileLength;
-      const mimeType = audMessage.mimetype;
-      return {
-        ...defaultData,
-        fileLength: fileLength
-          ? Long.isLong(fileLength)
-            ? fileLength.toNumber()
-            : Number(fileLength)
-          : undefined,
-        ptt: audMessage.ptt || false,
-        seconds: audMessage.seconds || undefined,
-        isViewOnce: audMessage.viewOnce || false,
-        ...(await download(
-          v7() + (mimeType ? "." + mimeType.split("/")[1] : ".ogg"),
-          mimeType || undefined,
-        )),
-      };
-    },
-    stickerMessage: async () => {
-      const stkMessage: proto.Message.IStickerMessage =
-        normalized["stickerMessage"]!;
-      return {
-        ...defaultData,
-        height: stkMessage.height || undefined,
-        width: stkMessage.width || undefined,
-        ...(await download(v7() + ".webp", stkMessage.mimetype || undefined)),
-      };
-    },
+    // imageMessage: async () => {
+    //   const imgMessage: proto.Message.IImageMessage =
+    //     normalized["imageMessage"]!;
+    //   const fileLength = imgMessage.fileLength;
+    //   const mimeType = imgMessage.mimetype;
+    //   return {
+    //     ...defaultData,
+    //     fileLength: fileLength
+    //       ? Long.isLong(fileLength)
+    //         ? fileLength.toNumber()
+    //         : Number(fileLength)
+    //       : undefined,
+    //     width: imgMessage.width || undefined,
+    //     height: imgMessage.height || undefined,
+    //     isViewOnce: imgMessage.viewOnce || false,
+    //     text: imgMessage.caption || undefined,
+    //     ...(await download(
+    //       v7() + (mimeType ? "." + mimeType.split("/")[1] : ".jpg"),
+    //       mimeType || undefined,
+    //     )),
+    //   };
+    // },
+    // videoMessage: async () => {
+    //   const vdMessage: proto.Message.IVideoMessage =
+    //     normalized["videoMessage"]!;
+    //   const fileLength = vdMessage.fileLength;
+    //   const mimeType = vdMessage.mimetype;
+    //   return {
+    //     ...defaultData,
+    //     fileLength: fileLength
+    //       ? Long.isLong(fileLength)
+    //         ? fileLength.toNumber()
+    //         : Number(fileLength)
+    //       : undefined,
+    //     height: vdMessage.height || undefined,
+    //     width: vdMessage.width || undefined,
+    //     isViewOnce: vdMessage.viewOnce || false,
+    //     text: vdMessage.caption || undefined,
+    //     ...(await download(
+    //       v7() + (mimeType ? "." + mimeType.split("/")[1] : ".mp4"),
+    //       mimeType || undefined,
+    //     )),
+    //   };
+    // },
+    // audioMessage: async () => {
+    //   const audMessage: proto.Message.IAudioMessage =
+    //     normalized["audioMessage"]!;
+    //   const fileLength = audMessage.fileLength;
+    //   const mimeType = audMessage.mimetype;
+    //   return {
+    //     ...defaultData,
+    //     fileLength: fileLength
+    //       ? Long.isLong(fileLength)
+    //         ? fileLength.toNumber()
+    //         : Number(fileLength)
+    //       : undefined,
+    //     ptt: audMessage.ptt || false,
+    //     seconds: audMessage.seconds || undefined,
+    //     isViewOnce: audMessage.viewOnce || false,
+    //     ...(await download(
+    //       v7() + (mimeType ? "." + mimeType.split("/")[1] : ".ogg"),
+    //       mimeType || undefined,
+    //     )),
+    //   };
+    // },
+    // stickerMessage: async () => {
+    //   const stkMessage: proto.Message.IStickerMessage =
+    //     normalized["stickerMessage"]!;
+    //   return {
+    //     ...defaultData,
+    //     height: stkMessage.height || undefined,
+    //     width: stkMessage.width || undefined,
+    //     ...(await download(v7() + ".webp", stkMessage.mimetype || undefined)),
+    //   };
+    // },
     contactMessage: async () => {
       const cttMessage: proto.Message.IContactMessage =
         normalized["contactMessage"]!;
