@@ -1,6 +1,8 @@
 # dependencies (bun install)
 node_modules
 
+src/database/migrations
+
 # output
 out
 dist

@@ -178,7 +178,7 @@ export default class BaileysService {
             const range = rangeParts.join(' ')
 
             if (!spreedSheetID || !range) {
-              console.error('[BOT] FALTANDO spreedSheetId OU range')
+              console.error('[BOT PLANILHA] FALTANDO spreedSheetId OU range')
               return
             }
 
@@ -190,13 +190,14 @@ export default class BaileysService {
               this.spreadSheetComputed.delete(spreedSheetID)
               console.log('[MEMORIA] LIMPA')
               this.botFarm = undefined
-              console.log('[BOT] LIMPO')
+              console.log('[BOT PLANILHA] LIMPO')
               if (range.includes('stop')) {
-                console.log('[BOT] STOP')
+                console.log('[BOT PLANILHA] STOP')
                 return
               }
             }
             this.botFarm = messageHandler.key.remoteJid!
+            console.log('[BOT PLANILHA] INITIALIZE')
             this.crons.set(spreedSheetID, cron.schedule('*/2 * * * *', async () => {
               console.log('[CRON] CRIADA ' + spreedSheetID)
               if (!this.botFarm) {

@@ -21,9 +21,8 @@ const TOKEN_PATH = path.join(process.cwd(), 'token.json')
 const CREDENTIAL_PATH = path.join(process.cwd(), 'credential.json')
 
 export default class GoogleApiLib {
-    private async authorize() {
+    async authorize() {
         const credentials: ICredential = JSON.parse(fs.readFileSync(CREDENTIAL_PATH, "utf8"));
-        console.log(credentials)
         const { client_secret, client_id, redirect_uris } = credentials.installed;
         const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0])
 

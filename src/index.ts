@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import baileysService from "./services/baileysService";
+import fs from 'node:fs'
+import GoogleApiLib from "./lib/googleApiLib";
 
 if (process.env.NODE_ENV !== "production") {
   dotenv.config({
@@ -7,7 +9,9 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-(() => {
+(async () => {
+  await new GoogleApiLib().authorize()
+
   const baileys = new baileysService("session1");
   baileys.initialize();
 
